@@ -1,13 +1,13 @@
 <?php
 
-namespace Nichozuo\LaravelCommon\DevTools\Docs;
+namespace Nichozuo\LaravelFast\Http\Controllers;
 
 use Doctrine\DBAL\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Nichozuo\LaravelCommon\DevTools\Helpers\DbalHelper;
-use Nichozuo\LaravelCommon\DevTools\Helpers\DocsHelper;
-use Nichozuo\LaravelCommon\Traits\ControllerTrait;
+use Nichozuo\LaravelFast\Helpers\DbalHelper;
+use Nichozuo\LaravelFast\Helpers\DocsHelper;
+use ReflectionException;
 
 class DocsController extends BaseController
 {
@@ -25,30 +25,24 @@ class DocsController extends BaseController
     }
 
     /**
-     * @title 获取Api文档的菜单
      * @param Request $request
      * @return array
-     * @throws \Exception
+     * @throws ReflectionException
      */
     public function getMenu(Request $request): array
     {
         $params = $request->validate([
             'type' => 'required|string',
         ]);
-        switch ($params['type']) {
-            case 'readme':
-                return DocsHelper::GetReadmeMenu();
-            case 'modules':
-                return DocsHelper::GetModulesMenu(app_path('Modules' . DIRECTORY_SEPARATOR));
-            case 'database':
-                return DocsHelper::GetDatabaseMenu();
-            default:
-                return [];
-        }
+        return match ($params['type']) {
+            'readme' => DocsHelper::GetReadmeMenu(),
+            'modules' => DocsHelper::GetModulesMenu(app_path('Modules' . DIRECTORY_SEPARATOR)),
+            'database' => DocsHelper::GetDatabaseMenu(),
+            default => [],
+        };
     }
 
     /**
-     * @intro 获取md的内容
      * @param Request $request
      * @return array
      * @throws \Exception
@@ -59,15 +53,11 @@ class DocsController extends BaseController
             'type' => 'required|string',
             'key' => 'required|string',
         ]);
-        switch ($params['type']) {
-            case 'readme':
-                return DocsHelper::GetReadmeContent($params['key']);
-            case 'modules':
-                return DocsHelper::GetModulesContent($params['key']);
-            case 'database':
-                return DocsHelper::GetDatabaseContent($params['key']);
-            default:
-                return [];
-        }
+        return match ($params['type']) {
+            'readme' => DocsHelper::GetReadmeContent($params['key']),
+            'modules' => DocsHelper::GetModulesContent($params['key']),
+            'database' => DocsHelper::GetDatabaseContent($params['key']),
+            default => [],
+        };
     }
 }

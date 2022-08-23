@@ -23,9 +23,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/resources/docs' => public_path('docs'),
-            __DIR__ . '/config/common.php' => config_path('common.php')
+            __DIR__ . '/../resources/docs' => public_path('docs'),
+            __DIR__ . '/../config/common.php' => config_path('common.php')
         ]);
-        $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
     }
 }

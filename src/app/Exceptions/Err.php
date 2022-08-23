@@ -6,30 +6,17 @@ use Exception;
 
 class Err extends Exception
 {
-    /**
-     * @param array $arr
-     * @param string $description
-     * @param int $type
-     * @return mixed
-     * @throws Err
-     */
-    public static function New(array $arr, string $description = '', int $type = 2): mixed
-    {
-        if ($description == '' && count($arr) == 3)
-            $description = $arr[2];
-
-        throw new static((int)$arr[0], $arr[1], $description, $type);
-    }
+    const AuthUserNotLogin = ['message' => '未登录', 'code' => 10000];
+    const AuthUserPasswordWrong = ['message' => '账号密码错误', 'code' => 10001];
 
     /**
      * @param string $message
-     * @param string $description
-     * @param int $type
+     * @param int $code
      * @return mixed
      * @throws Err
      */
-    public static function NewText(string $message, string $description = '', int $type = 2): mixed
+    public static function NewText(string $message, int $code = 9999): mixed
     {
-        throw new static(999, $message, $description, $type);
+        throw new static($message, $code);
     }
 }

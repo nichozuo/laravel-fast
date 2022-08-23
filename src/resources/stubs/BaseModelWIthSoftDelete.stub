@@ -5,7 +5,7 @@ namespace App\Models\Base;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Nichozuo\LaravelCommon\Traits\ModelTrait;
+use Nichozuo\LaravelFast\Models\ModelTrait;
 use Illuminate\Database\Eloquent\Relations;
 use App\Models;
 

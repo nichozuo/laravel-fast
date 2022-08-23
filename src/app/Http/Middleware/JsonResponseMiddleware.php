@@ -1,6 +1,6 @@
 <?php
 
-namespace Nichozuo\LaravelCommon\Middleware;
+namespace Nichozuo\LaravelFast\Http\Middleware;
 
 
 use Closure;
@@ -11,12 +11,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class JsonResponseMiddleware
 {
     /**
-     * @intro 处理json响应的中间件
      * @param $request
      * @param Closure $next
-     * @return JsonResponse|mixed|BinaryFileResponse
+     * @return JsonResponse|mixed|BinaryFileResponse|StreamedResponse
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): mixed
     {
         $response = $next($request);
 

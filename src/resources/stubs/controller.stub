@@ -7,7 +7,7 @@ namespace App\Modules\{{ModuleName}};
 use App\Http\Controllers\Controller;
 use App\Models\{{ModelName}};
 use Illuminate\Http\Request;
-use Nichozuo\LaravelCommon\Exception\Err;
+use Nichozuo\LaravelFast\Exceptions\Err;
 
 /**
  * @intro {{TableComment}}

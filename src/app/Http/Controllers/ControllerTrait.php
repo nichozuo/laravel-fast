@@ -1,15 +1,14 @@
 <?php
 
 
-namespace Nichozuo\LaravelCommon\Traits;
+namespace Nichozuo\LaravelFast\Http\Controllers;
 
 
-use Nichozuo\LaravelCommon\Exception\Err;
+use Nichozuo\LaravelFast\Exceptions\Err;
 
 trait ControllerTrait
 {
     /**
-     * @intro 获得分页size
      * @return int
      * @throws Err
      */
@@ -19,7 +18,7 @@ trait ControllerTrait
         if (!isset($params['perPage']) || !is_numeric($params['perPage']))
             return 20;
 
-        $allow = config('nichozuo.perPageAllow', [10, 20, 50, 100]);
+        $allow = config('common.perPageAllow', [10, 20, 50, 100]);
         if (!in_array($params['perPage'], $allow))
             Err::NewText('分页数据不在规定范围内');
 
@@ -27,7 +26,6 @@ trait ControllerTrait
     }
 
     /**
-     * @intro 获得mines
      * @return string
      */
     protected function getMines(): string
@@ -41,8 +39,9 @@ trait ControllerTrait
     /**
      * @param array $params
      * @param string $key
+     * @return void
      */
-    protected function crypto(array &$params, string $key = 'password')
+    protected function crypto(array &$params, string $key = 'password'): void
     {
         if (isset($params[$key]))
             $params[$key] = bcrypt($params[$key]);
