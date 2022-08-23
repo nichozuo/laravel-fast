@@ -17,7 +17,7 @@
     "autoload": {
         "psr-4": {
             "Nichozuo\\LaravelFast\\": "src\\app",
-            "Nichozuo\\LaravelFast\\Tests": "src\\tests"
+            "Nichozuo\\LaravelFast\\Tests\\": "src\\tests"
         }
     },
     "extra": {
